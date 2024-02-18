@@ -1,0 +1,23 @@
+{
+  "name": "taytaylyricofthe.day",
+  "version": "1.0.0",
+  "description": "Challenge: Fill in the missing word of a Taylor Swift lyric every day.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capjamesg/taytaylyricofthe.day.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/capjamesg/taytaylyricofthe.day/issues"
+  },
+  "homepage": "https://github.com/capjamesg/taytaylyricofthe.day#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}

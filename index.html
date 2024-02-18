@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TayTay Lyric of the Day</title>
+        <script src="/assets/js/browser-window.js"></script>
+
+        <meta name="description" content="Challenge: Fill in the missing word of a Taylor Swift lyric every day.">
+        <meta property="og:image" content="https://screenshot.jamesg.blog?url=https://taytaylyricofthe.day">
+        <meta property="og:title" content="TayTay Lyric of the Day">
+        <meta property="og:description" content="Challenge: Fill in the missing word of a Taylor Swift lyric every day.">
+        <meta property="og:url" content="https://taytaylyricofthe.day">
+        <meta property="og:type" content="website">
+        <meta name="twitter:card" content="summary_large_image">
+
+        <link rel="alternate" type="application/rss+xml" title="TayTay Lyric of the Day" href="/feed.xml">
+
+        <link rel="icon" href="/assets/img/favicon.ico">
+        <style>
+            * {
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+            }
+            main {
+                padding: 20px;
+                text-align: center;
+                max-width: 35em;
+                margin: auto;
+            }
+            fill-mask {
+                max-width: 500px;
+                display: block;
+                margin: auto;
+                border: 2px dotted royalblue;
+                padding: 10px;
+                line-height: 1.5;
+            }
+            fill-mask button {
+                margin: 10px;
+                padding: 10px 20px;
+                background-color: royalblue;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            fill-mask input {
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid lightgray;
+                margin: 10px;
+            }
+            iframe {
+                width: 100%;
+                height: 300px;
+                border: none;
+            }
+            #buttons {
+                margin: auto;
+            }
+            .button-link {
+                display: inline-block;
+                padding: 10px 20px;
+                margin: 10px;
+                background-color: royalblue;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+            }
+            a {
+                text-decoration: none;
+                color: royalblue;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            details {
+                margin-top: 20px;
+                border: 2px dotted royalblue;
+                padding: 10px;
+            }
+            details > h2, details > p {
+                text-align: left;
+                margin: 20px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>TayTay Lyric of the Day</h1>
+            <p>Challenge: Fill in the missing word of a Taylor Swift lyric every day.</p>
+            
+    <fill-mask text="The question pounds my head, what's a lifetime of [word]." answer="achievement"></fill-mask>
+    <script>
+        class FillMask extends HTMLElement {
+            constructor () {
+                super();
+            }
+
+            connectedCallback() {
+                this.innerHTML = `
+                    <p>${this.getAttribute("text").replace("[word]", `<input type="text" data-answer="${this.getAttribute("answer")}">`)}</p>
+                    <button id="check">Check</button>
+                    <button id="reveal">Reveal</button>
+                    <p>Streak: <span id="streak"></span></p>
+                `;
+                var button = this.querySelector("#check");
+
+                var answer = this.getAttribute("answer");
+                answer = answer.toLowerCase();
+
+                var reveal = this.querySelector("#reveal");
+
+                button.addEventListener("click", function () {
+                    var input = document.querySelector("input");
+
+                    if (input.value === answer) {
+                        input.style.backgroundColor = "lightgreen";
+
+                        // hide buttons
+                        button.style.display = "none";
+                        reveal.style.display = "none";
+
+                        // update streak
+                        var streak = localStorage.getItem("streak");
+
+                        if (streak === null) {
+                            streak = "";
+                        }
+
+                        localStorage.setItem("streak", streak + "🟢");
+                        document.querySelector("#streak").textContent = streak + "🟢";
+
+                        localStorage.setItem("lastGame", new Date().toDateString());
+                    } else {
+                        input.style.backgroundColor = "lightcoral";
+
+                        // update streak
+                        var streak = localStorage.getItem("streak");
+                        localStorage.setItem("streak", steak + "🔴");
+                        document.querySelector("#streak").textContent = streak + "🔴";
+                    }
+                });
+
+                reveal.addEventListener("click", function () {
+                    var input = document.querySelector("input");
+
+                    input.style.backgroundColor = "white";
+                    input.value = answer;
+
+                    button.disabled = true;
+                    localStorage.setItem("lastGame", new Date().toDateString());
+                });
+                
+                var streak = localStorage.getItem("streak");
+                var lastGame = localStorage.getItem("lastGame");
+
+                if (streak === null) {
+                    streak = "";
+                }
+
+                // streak is sequence of 1s and 0s, 1 is a win, 0 is a loss
+
+                document.querySelector("#streak").textContent = streak;
+
+                // disable if last game was today
+                if (lastGame === new Date().toDateString()) {
+                    button.style.display = "none";
+                    reveal.style.display = "none";
+                    // set answer
+                    var input = document.querySelector("input");
+                    input.value = answer;
+                } else {
+                    localStorage.setItem("lastGame", new Date().toDateString());
+                }
+            }
+        }
+
+        customElements.define("fill-mask", FillMask);
+    </script>
+            <section id="buttons">
+                <a class="button-link" href="/feed.rss">Subscribe to TayTay Lyric of the Day RSS Feed</a>
+            </section>
+            <section id="about">
+                <details>
+                    <summary>About TayTay Lyric of the Day</summary>
+                    <h2>About TayTay Lyric of the Day</h2>
+                    <p>Test your comprehension of Taylor Swift's music with the TayTay Lyric of the Day challenge. Every day, a new lyric is posted with a missing word. Can you fill in the blank?</p>
+                    <p>The quiz is reset every day, so you can test your knowledge of Taylor Swift's music every day.</p>
+                </details>
+            </section>
+            <footer>
+                <p>Made with ❤️, 🍪, and a 💻 by <a href="https://jamesg.blog">jamesg.blog</a>. <a href="https://github.com/capjamesg/taytaylyricofthe.day">View source code</a>.</p>
+            </footer>
+        </main>
+    </body>
+</html>
