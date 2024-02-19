@@ -90,7 +90,7 @@
             <h1>TayTay Lyric of the Day</h1>
             <p>Challenge: Fill in the missing word of a Taylor Swift lyric every day.</p>
             
-    <fill-mask text="The question pounds my head, what's a lifetime of [word]." answer="achievement"></fill-mask>
+    <fill-mask text="{% lyricToday %}." answer="{% answerToday %}"></fill-mask>
     <script>
         class FillMask extends HTMLElement {
             constructor () {
@@ -164,10 +164,10 @@
                 document.querySelector("#streak").textContent = streak;
 
                 // disable if last game was today
+                console.log(lastGame);
                 if (lastGame === new Date().toDateString()) {
                     button.style.display = "none";
                     reveal.style.display = "none";
-                    // set answer
                     var input = document.querySelector("input");
                     input.value = answer;
                 } else {
