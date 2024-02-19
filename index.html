@@ -102,6 +102,7 @@
         <main>
             <h1>TayTay Lyric of the Day 🎤</h1>
             <p>Challenge: Fill in the missing word of a Taylor Swift lyric every day.</p>
+            <p id="check-back" style="display: none;">Check back tomorrow for another lyric.</p>
             
     <fill-mask text="{% lyricToday %}." answer="{% answerToday %}"></fill-mask>
     <script>
@@ -183,6 +184,9 @@
                     reveal.style.display = "none";
                     var input = document.querySelector("input");
                     input.value = answer;
+                    input.disabled = true;
+                    var checkBack = document.querySelector("#check-back");
+                    checkBack.style.display = "block";
                 }
             }
         }
