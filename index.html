@@ -115,7 +115,7 @@
                     <p>${this.getAttribute("text").replace("[word]", `<input type="text" data-answer="${this.getAttribute("answer")}">`)}</p>
                     <button id="check">Check</button>
                     <button id="reveal">Reveal</button>
-                    <p>Streak: <span id="streak"></span></p>
+                    <p>Streak: <span id="streak">0</span></p>
                 `;
                 var button = this.querySelector("#check");
 
@@ -191,9 +191,6 @@
 
         customElements.define("fill-mask", FillMask);
     </script>
-            <section id="buttons">
-                <a class="button-link" href="/feed.rss">Subscribe to TayTay Lyric of the Day RSS Feed</a>
-            </section>
             <section id="about">
                 <details>
                     <summary>About TayTay Lyric of the Day</summary>
