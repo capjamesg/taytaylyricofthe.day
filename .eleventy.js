@@ -5,6 +5,6 @@ module.exports = function(eleventyConfig) {
         return lyric.lyric;
     });
     eleventyConfig.addShortcode("answerToday", function() {
-        return lyric.answer;
+        return lyric.answer.replace(/[^a-zA-Z ]/g, "");
     });
 };
