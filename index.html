@@ -121,7 +121,7 @@
                 var button = this.querySelector("#check");
 
                 var answer = this.getAttribute("answer");
-                answer = answer.toLowerCase();
+                answer = answer.toLowerCase().replace(/[^a-zA-Z ]/g, "");
 
                 var reveal = this.querySelector("#reveal");
 
