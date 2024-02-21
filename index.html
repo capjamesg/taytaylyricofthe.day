@@ -128,7 +128,7 @@
                 button.addEventListener("click", function () {
                     var input = document.querySelector("input");
 
-                    if (input.value === answer) {
+                    if (input.value.replace(/[^a-zA-Z ]/g, "") === answer) {
                         input.style.backgroundColor = "lightgreen";
 
                         // hide buttons
